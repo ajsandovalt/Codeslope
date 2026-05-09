@@ -1,2 +1,2 @@
-# Codelope
+# Codeslope
 AI agent to assist in Coding
