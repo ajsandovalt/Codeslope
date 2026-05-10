@@ -33,16 +33,17 @@ def main():
         # Store messages like a conversation
         types.Content(role="user", parts=[types.Part(text=prompt)])
     ]
-    print("\nThe sloppinator has awaken!🤖\n")
+    print("Processing...")
     llm_response = client.models.generate_content(
         model="gemini-2.5-flash", contents=messages
     )
-
     if not llm_response:
         raise RuntimeError(
             "Response could not be retrieved from the server due to an API error. Request response: ",
             llm_response,
         )
+
+    print("\nThe sloppinator has awaken!🤖\n")
 
     if args.verbose:
         print("\t🤖---- VERBOSE MODE ACTIVATED BEEP BOOP BEEP ---🤖")
@@ -53,6 +54,7 @@ User prompt: {prompt}
 Prompt tokens: {prompt_toke_usage}
 Response tokens: {response_token_usage}
             """)
+
     print(f"Reponse:\n{llm_response.text}")
 
 
