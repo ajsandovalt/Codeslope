@@ -35,7 +35,7 @@ def main():
     ]
     print("Processing...")
     llm_response = client.models.generate_content(
-        model="gemini-2.5-flash", contents=messages
+        model="gemini-2.5-flash", contents=messages # Prompt passed as messages
     )
     if not llm_response:
         raise RuntimeError(
