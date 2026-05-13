@@ -1,8 +1,25 @@
 import os
-from config import *
+from utilities.config import *
+from google.genai import types
+
+schema_get_files_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Opens the specified file and returns it's content as plain text, relative to the working directory. Only file are allowed directories will return an error.",
+    parameters=types.Schema(
+        required=["file_path"],
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File path to open and get plain text, relative to the working directory (default is the working directory itself)",
+            ),
+        },
+    ),
+)
 
 def get_file_content(working_directory, file_path):
     
+
     try:
 
         abs_working_directory = os.path.abspath(working_directory)

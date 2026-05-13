@@ -1,6 +1,28 @@
 import os
+from google.genai import types
+
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="Writes the {content} to the specified {file_path}. If the specified folder structure doesn't exists it will create it for you. If the file doesn't exists will create a new file for you.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        required=["file_path", "content"],
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File path to write to, relative to the working directory (default is the working directory itself), will automatically create the specified folder structure if dones't exists.",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="The content that will be written to the specified file (Will create a new file if it doesn't exists)",
+            ),
+        },
+    ),
+)
 
 def write_file(working_directory, file_path, content):
+
+
     try:
         
         abs_working_directory = os.path.abspath(working_directory)
